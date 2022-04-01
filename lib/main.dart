@@ -306,7 +306,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget mainView(){
 
-    const title = '* mainview * ';
+    const title = ' 정원 ';
 
     return MaterialApp(
       title: title,
@@ -322,39 +322,45 @@ class _MyHomePageState extends State<MyHomePage> {
             IconButton(icon: Icon(Icons.menu), onPressed: null),
           ],
         ),
-        body: Container(
-          margin: const EdgeInsets.symmetric(vertical: 20.0),
-          height: 200.0,
-          child: ListView(
-            // This next line does the trick.
-            scrollDirection: Axis.horizontal,
-            children: <Widget>[
-              Container(
-                width: 160.0,
-                color: Colors.red,
-              ),
-              Container(
-                width: 160.0,
-                color: Colors.blue,
-              ),
-              Container(
-                width: 160.0,
-                color: Colors.green,
-              ),
-              Container(
-                width: 160.0,
-                color: Colors.yellow,
-              ),
-              Container(
-                width: 160.0,
-                color: Colors.orange,
-              ),
-            ],
-          ),
+        body: Center(
+          child: main_threepart(),
         ),
+        // body: Container(
+        //   margin: const EdgeInsets.symmetric(vertical: 20.0),
+        //   height: 200.0,
+        //   child: ListView(
+        //     // This next line does the trick.
+        //     scrollDirection: Axis.horizontal,
+        //     children: <Widget>[
+        //       Container(
+        //         width: 160.0,
+        //         color: Colors.red,
+        //       ),
+        //       Container(
+        //         width: 160.0,
+        //         color: Colors.blue,
+        //       ),
+        //       Container(
+        //         width: 160.0,
+        //         color: Colors.green,
+        //       ),
+        //       Container(
+        //         width: 160.0,
+        //         color: Colors.yellow,
+        //       ),
+        //       Container(
+        //         width: 160.0,
+        //         color: Colors.orange,
+        //       ),
+        //     ],
+        //   ),
+        // ),
+
       ),
     );
   }
+
+
   void showError(message){
     if(ModalRoute.of(context)?.isCurrent != true)   // modalroute 클래스의 한 종류...(?)
       Navigator.of(context, rootNavigator: true).pop();   //  Navigator.pop()을 사용하면 첫 번째 route로 되돌아갈 수 있음
@@ -393,4 +399,144 @@ class _MyHomePageState extends State<MyHomePage> {
           );
         });
   }
+}
+
+class main_threepart extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(30.0),
+      child: ListView(
+        children: <Widget>[
+          _pageOfTop(), // 상단
+          _pageOfMiddle(), // 중단
+          _pageOfBottom(), // 하단
+        ],
+      ),
+    );
+  }
+}
+Widget _pageOfTop() {
+  return Column(
+    children: <Widget>[
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Icon(
+                Icons.directions_bike,
+                size: 40,
+              ),
+              Text('자전거'),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Icon(
+                Icons.directions_run,
+                size: 40,
+              ),
+              Text('달리기'),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Icon(
+                Icons.directions_bus,
+                size: 40,
+              ),
+              Text('버스'),
+            ],
+          ),
+        ],
+      ),
+      SizedBox(
+        height: 30,
+      ),
+      // Row와 Row사이에 위치시켜서 여백 넣기
+      Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: <Widget>[
+          Column(
+            children: <Widget>[
+              Icon(
+                Icons.directions_car,
+                size: 40,
+              ),
+              Text('자동차'),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Icon(
+                Icons.directions_subway,
+                size: 40,
+              ),
+              Text('지하철'),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              Icon(
+                Icons.directions_boat,
+                size: 40,
+              ),
+              Text('보트'),
+            ],
+          ),
+        ],
+      )
+    ],
+  );
+}
+
+Widget _pageOfMiddle() {
+  return Column(
+    // child: Container(
+    //       margin: const EdgeInsets.symmetric(vertical: 20.0),
+    //       height: 200.0,
+    //       child: ListView(
+    //         // This next line does the trick.
+    //         scrollDirection: Axis.horizontal,
+    //         children: <Widget>[
+    //           Container(
+    //             width: 160.0,
+    //             color: Colors.red,
+    //           ),
+    //           Container(
+    //             width: 160.0,
+    //             color: Colors.blue,
+    //           ),
+    //           Container(
+    //             width: 160.0,
+    //             color: Colors.green,
+    //           ),
+    //           Container(
+    //             width: 160.0,
+    //             color: Colors.yellow,
+    //           ),
+    //           Container(
+    //             width: 160.0,
+    //             color: Colors.orange,
+    //           ),
+    //         ],
+    //       ),
+    //     ),
+  );
+}
+
+Widget _pageOfBottom() {
+  final items = List.generate(15, (i) {
+    var num = i + 1;
+    return ListTile(
+      leading: Icon(Icons.notifications),
+      title: Text('$num번째 ListTile'),
+    );
+  });
+  return ListView(
+    physics: NeverScrollableScrollPhysics(), // 해당 리스트의 스크롤 금지
+    shrinkWrap: true, // 상위 리스트 위젯이 별도로 있다면 true 로 설정해야 스크롤이 가능
+    children: items,
+  );
 }
