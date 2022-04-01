@@ -52,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> {
       case 3:
         view = writeView(); //게시글 작성 뷰
         break;
-    //case 4:
-    //  view = plusView(); //친구추가 뷰
-    //  break;
+      case 4:
+        view = plusView(); //친구추가 뷰
+        break;
     }
 
     return Scaffold(
@@ -267,6 +267,69 @@ class _MyHomePageState extends State<MyHomePage> {
       state = 3;
     });
   }
+  Widget plusView(){
+    return Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                    '전화번호',
+                    style: TextStyle(fontSize: 20)
+                ),
+                SizedBox(
+                    width: 200,
+                    height: 30,
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
+                    )
+                )
+              ],
+            ),
+            SizedBox(height: 5),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                    '회원번호',
+                    style: TextStyle(fontSize: 20)
+                ),
+                SizedBox(
+                    width: 200,
+                    height: 30,
+                    child: TextField(
+                      textAlign: TextAlign.center,
+                      obscureText: true,
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                      ),
+                    )
+                )
+              ],
+            ),
+            SizedBox(height:20),
+            TextButton(
+              style : TextButton.styleFrom(primary: Colors.white,backgroundColor: Colors.grey),
+              onPressed: (){
+                setState((){
+                  state = 1;
+                });
+              },
+              child:
+              Text("확인", style: TextStyle(fontSize: 15)),
+            ),
+
+
+          ],
+        )
+    );
+
+  }
 
   Widget mainView(){
     const title = ' 정원 ';
@@ -304,7 +367,7 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   void menuAction() async{
     setState(() {
-      state = 0; //걍 state 변한거 확인하려고 로그인 화면으로 가게 함.
+      state = 4; //걍 state 변한거 확인하려고 로그인 화면으로 가게 함.
     });
   }
   //재영 글쓰기 뷰
@@ -318,7 +381,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 200,
                 width: 200,
-                child: Image.asset('assets/music.jpg'), //여기서 뮤직은 사진 저장명 정원:akmu 재영: music
+                child: Image.asset('assets/akmu.jpg'), //여기서 뮤직은 사진 저장명 정원:akmu 재영: music
               ),
 
 
@@ -688,7 +751,7 @@ Widget _pageOfBottom(){
             title: Text('♫노래 : 낙하   🎙️가수 : 악동뮤지션'),
             subtitle: Text('레트로하면서도 세련된 \n음악이야 추천해! 아이유가 참여해서 더 독특하고 풍성하게 들리는 것 같아 \n그나저나 악뮤 컴백은 언제..? '),
             leading: Image.network('https://image.bugsm.co.kr/album/images/1000/40586/4058623.jpg'),
-            trailing: IconButton(icon: Icon(Icons.menu), onPressed: () {
+            trailing: IconButton(icon: Icon(Icons.favorite), onPressed: () {
               //
             },),//Icon(Icons.favorite)
           )
@@ -696,36 +759,51 @@ Widget _pageOfBottom(){
 
 
           Card(child: ListTile(
-              title: Text('♫노래 : Wannabe   🎙가수 : ITZY'),
-              subtitle: Text('노래도 듣고 뮤직비디오도 꼭 보길 바래! \n다들 이 세상 미모가 아니야!! \n우울할 때마다 맨날 듣는 중이야ㅎㅎㅎ'),
-              leading: Image.network('https://img.hankyung.com/photo/202009/e03249ed43e314ad0736c8e4f14bfa4b.jpg'),
-              trailing: Icon(Icons.favorite))),
+            title: Text('♫노래 : Wannabe   🎙가수 : ITZY'),
+            subtitle: Text('노래도 듣고 뮤직비디오도 꼭 보길 바래! \n다들 이 세상 미모가 아니야!! \n우울할 때마다 맨날 듣는 중이야ㅎㅎㅎ'),
+            leading: Image.network('https://img.hankyung.com/photo/202009/e03249ed43e314ad0736c8e4f14bfa4b.jpg'),
+            trailing: IconButton(icon: Icon(Icons.favorite), onPressed: () {
+              //
+            },),//Icon(Icons.favorite)
+          )),
 
 
           Card(child: ListTile(
-              title: Text('♫노래 : 별의 조각   🎙가수 : 윤하'),
-              subtitle: Text('윤하 노래는 믿고 들어야되는거 다들 알지?ㅎㅎ \n듣다보면 아주 힐링되는 곡인 것 같아 \n나만 듣기 너무 아까운 곡이랄까..? 궁금하지?? 꼭 들어봥'),
-              leading: Image.network('https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/tv/2021/11/17/1637116189_1612956.jpg'),
-              trailing: Icon(Icons.favorite))),
+            title: Text('♫노래 : 별의 조각   🎙가수 : 윤하'),
+            subtitle: Text('윤하 노래는 믿고 들어야되는거 다들 알지?ㅎㅎ \n듣다보면 아주 힐링되는 곡인 것 같아 \n나만 듣기 너무 아까운 곡이랄까..? 궁금하지?? 꼭 들어봥'),
+            leading: Image.network('https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/tv/2021/11/17/1637116189_1612956.jpg'),
+            trailing: IconButton(icon: Icon(Icons.favorite), onPressed: () {
+              //
+            },),//Icon(Icons.favorite)
+          )),
 
 
           Card(child: ListTile(
-              title: Text('♫노래 : 되돌리다   🎙가수 : 이승기'),
-              subtitle: Text("그때 그 시절 감성 가득가득이야.. 이노래 아는 사람 손...? \n이 노래 모르면 간첩이지~!!"),
-              leading: Image.network('http://gaonchart.co.kr/upload_images/board/201411/176AF6BE116B4600B18020BD090D23F1.jpg'),
-              trailing: Icon(Icons.favorite))),
+            title: Text('♫노래 : 되돌리다   🎙가수 : 이승기'),
+            subtitle: Text("그때 그 시절 감성 가득가득이야.. 이노래 아는 사람 손...? \n이 노래 모르면 간첩이지~!!"),
+            leading: Image.network('http://gaonchart.co.kr/upload_images/board/201411/176AF6BE116B4600B18020BD090D23F1.jpg'),
+            trailing: IconButton(icon: Icon(Icons.favorite), onPressed: () {
+              //
+            },),//Icon(Icons.favorite)
+          )),
 
           Card(child: ListTile(
-              title: Text('♫노래 : INVU   🎙가수 : 태연'),
-              subtitle: Text('이번에 나온 태연 신곡인데 들으면 들을수록 중독성있어!! \n음악방송에서 태연이 하는 안무가 너무 멋있더라ㅜㅠ '),
-              leading: Image.network('https://t2.genius.com/unsafe/409x409/https%3A%2F%2Fimages.genius.com%2F19ed6351954c2b686b79302ae0c1e55c.1000x1000x1.png'),
-              trailing: Icon(Icons.favorite))),
+            title: Text('♫노래 : INVU   🎙가수 : 태연'),
+            subtitle: Text('이번에 나온 태연 신곡인데 들으면 들을수록 중독성있어!! \n음악방송에서 태연이 하는 안무가 너무 멋있더라ㅜㅠ '),
+            leading: Image.network('https://t2.genius.com/unsafe/409x409/https%3A%2F%2Fimages.genius.com%2F19ed6351954c2b686b79302ae0c1e55c.1000x1000x1.png'),
+            trailing: IconButton(icon: Icon(Icons.favorite), onPressed: () {
+              //
+            },),//Icon(Icons.favorite)
+          )),
 
           Card(child: ListTile(
-              title: Text('♫노래 : 8282   🎙가수 : 다비치'),
-              subtitle: Text('이 노래 다들 노래방 18번곡 아닌가~? \n노래방 갈 때마다 빠지지 않고 부르는 노래지 암암 give me a call~ babe babe~'),
-              leading: Image.network('https://image.aladin.co.kr/product/339/50/cover500/923138502x_2.jpg'),
-              trailing: Icon(Icons.favorite))),
+            title: Text('♫노래 : 8282   🎙가수 : 다비치'),
+            subtitle: Text('이 노래 다들 노래방 18번곡 아닌가~? \n노래방 갈 때마다 빠지지 않고 부르는 노래지 암암 give me a call~ babe babe~'),
+            leading: Image.network('https://image.aladin.co.kr/product/339/50/cover500/923138502x_2.jpg'),
+            trailing: IconButton(icon: Icon(Icons.favorite), onPressed: () {
+              //
+            },),//Icon(Icons.favorite)
+          )),
         ],
       ));
 }
