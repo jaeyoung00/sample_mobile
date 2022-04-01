@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-void main()   {
+void main() {
   runApp(MyApp());
 }
 
@@ -52,8 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int state = 0;  // 초기값은 0으로 설정
   final phoneController = TextEditingController();    // text를 입력받기 위해서는 TextEditingController 사용
   final passwordController = TextEditingController();  //  동일
-  final singerController = TextEditingController();    // 추가
-  final musicController = TextEditingController();   // 추가
+
 
   @override
   Widget build(BuildContext context) {
@@ -71,14 +70,11 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1: // main
         view = mainView();
         break;
-      case 2:
-        view = writeView();
-        break;
     }
 
     return Scaffold(
         appBar: null,  // 앱 윗부분에 아무것도 없음
-        body: view  // 메인 가운데 화면
+        body: view   // 메인 가운데 화면
     );
   }
 
@@ -86,8 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // showError("test");
     var phone = phoneController.text;
     var password = passwordController.text;
-    var singer = singerController.text;  //  추가
-    var music = musicController.text;   //   추가
 
     if(phone.length == 0){
       showError("전화번호를 입력해주세요.");
@@ -100,7 +94,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var postUrl = "http://192.168.213.69/login";
     var u = Uri.parse(postUrl);
-    var body = convert.jsonEncode({'phone': phone, 'password': password, 'singer' :singer, 'music': music});  // singer, music 추가
+    var body = convert.jsonEncode({'phone': phone, 'password': password});
     print(phone);
 
     var response = await http.post(u, headers: {"Content-Type": "application/json"},
@@ -205,9 +199,6 @@ class _MyHomePageState extends State<MyHomePage> {
           OutlinedButton(
             style: TextButton.styleFrom( primary: Colors.grey, backgroundColor: Colors.white),
             onPressed: () {
-              setState(() {
-                state = 2;
-              });
             },
             child:
             Text("회원가입", style: TextStyle(fontSize: 15)),
@@ -216,93 +207,6 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
     );
   }
-
-
-  // 이재영 게시글쓰기 부분
-  Widget writeView() {
-    return Center(
-        child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              SizedBox(
-                height: 200,
-                width: 200,
-                child: Image.asset('assets/music.jpg'),
-              ),
-
-
-              Text(
-                  '♫ 노래 : ',
-                      style: TextStyle(fontSize: 20)
-                  ),
-              SizedBox(
-                  width: 200,
-                  height: 40,
-                  child: TextField(
-                    controller: musicController,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                          // labelText: 'Password',
-                        ),
-                      )
-                  ),
-
-
-              SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                      '🎙️가수 : ',
-                      style: TextStyle(fontSize: 20)
-                  ),
-
-                  SizedBox(
-                      width: 200,
-                      height: 40,
-                      child: TextField(
-                        controller: singerController,
-                        textAlign: TextAlign.center,
-                        decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          // labelText: 'Password',
-                        ),
-                      )
-                  )
-                ],
-              ),
-
-
-              SizedBox(height: 20),
-              Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                        '',
-                        style: TextStyle(fontSize: 20)
-                    ),
-                    SizedBox(
-                        width: 400,
-                        height: 500,
-                        child: TextField(
-                          textAlign: TextAlign.start,
-                          decoration: InputDecoration(
-                            labelText: '코멘트를 남겨주세요',
-                            border: OutlineInputBorder(),
-                          ),
-                          maxLines: 5, //
-                          minLines: 1, //
-                        )
-
-                    )
-                  ]
-              )
-            ]
-        )
-    );
-  }
-
 
   Widget mainView(){
     return Center(
