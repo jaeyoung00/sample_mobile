@@ -206,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextButton.styleFrom( primary: Colors.grey, backgroundColor: Colors.white),
             onPressed: () {
               setState(() {
-                state = 1;
+                state = 2;
               });
             },
             child:
@@ -218,34 +218,44 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-  // 이재영 게시글쓰기 부분
+  //재영 글쓰기 뷰
   Widget writeView() {
+    var singerController;
+    var musicController;
     return Center(
-        child: Row(
+        child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 200,
-                width: 200,
+                height: 100,
+                width: 100,
                 child: Image.asset('assets/music.jpg'),
               ),
 
 
-              Text(
-                  '♫ 노래 : ',
-                  style: TextStyle(fontSize: 20)
-              ),
-              SizedBox(
-                  width: 200,
-                  height: 40,
-                  child: TextField(
-                    controller: musicController,
-                    textAlign: TextAlign.center,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      // labelText: 'Password',
-                    ),
+              SizedBox(height: 20),
+              Row(
+
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                      '♫ 노래 : ',
+                      style: TextStyle(fontSize: 20)
+                  ),
+
+                  SizedBox(
+                      width: 200,
+                      height: 40,
+                      child: TextField(
+                        controller: singerController,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          // labelText: 'Password',
+                        ),
+                      )
                   )
+                ],
               ),
 
 
@@ -302,7 +312,6 @@ class _MyHomePageState extends State<MyHomePage> {
         )
     );
   }
-
 
   Widget mainView(){
 
