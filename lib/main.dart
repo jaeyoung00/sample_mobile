@@ -1,11 +1,8 @@
-import 'dart:html';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:convert' as convert;
 import 'package:http/http.dart' as http;
 
-void main() {
+void main()   {
   runApp(MyApp());
 }
 
@@ -52,10 +49,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int state = 0; // 초기값은 0으로 설정
-  final phoneController = TextEditingController(); // text를 입력받기 위해서는 TextEditingController 사용
-  final passwordController = TextEditingController(); //  동일
-
+  int state = 0;  // 초기값은 0으로 설정
+  final phoneController = TextEditingController();    // text를 입력받기 위해서는 TextEditingController 사용
+  final passwordController = TextEditingController();  //  동일
+  final singerController = TextEditingController();    // 추가
+  final musicController = TextEditingController();   // 추가
 
   @override
   Widget build(BuildContext context) {
@@ -73,60 +71,59 @@ class _MyHomePageState extends State<MyHomePage> {
       case 1: // main
         view = mainView();
         break;
-      case 2:  // write
+      case 2:
         view = writeView();
         break;
     }
 
     return Scaffold(
-        appBar: null, // 앱 윗부분에 아무것도 없음
-        body: view // 메인 가운데 화면
+        appBar: null,  // 앱 윗부분에 아무것도 없음
+        body: view  // 메인 가운데 화면
     );
   }
 
-  void login() async {
-    // await이랑 짝
+  void login() async{   // await이랑 짝
     // showError("test");
     var phone = phoneController.text;
     var password = passwordController.text;
+    var singer = singerController.text;  //  추가
+    var music = musicController.text;   //   추가
 
-    if (phone.length == 0) {
+    if(phone.length == 0){
       showError("전화번호를 입력해주세요.");
       return;
     }
-    if (password.length == 0) {
+    if(password.length == 0){
       showError("비밀번호를 입력해주세요.");
       return;
     }
 
-    var postUrl = "http://192.168.0.7/login"; // 각자 사용하는 ip 주소
+    var postUrl = "http://192.168.213.69/login";
     var u = Uri.parse(postUrl);
-    var body = convert.jsonEncode({'phone': phone, 'password': password});
+    var body = convert.jsonEncode({'phone': phone, 'password': password, 'singer' :singer, 'music': music});  // singer, music 추가
     print(phone);
 
-    var response = await http.post(
-        u, headers: {"Content-Type": "application/json"},
+    var response = await http.post(u, headers: {"Content-Type": "application/json"},
         body: body);
-    if (response.statusCode == 200) { // 성공이면 200번대
+    if (response.statusCode == 200) {   // 성공이면 200번대
       // var res = convert.jsonDecode(convert.utf8.decode(response.bodyBytes));
       setState(() {
         state = 1;
       });
-    } else if (response.statusCode == 404) { // 에러 400번대 : 클라이언트 오류
+    }else if(response.statusCode == 404) {  // 에러 400번대 : 클라이언트 오류
       showError("계정이 없습니다.");
-    } else if (response.statusCode == 401) { // 에러 400번대 : 클라이언트 오류
+    }else if(response.statusCode == 401) {  // 에러 400번대 : 클라이언트 오류
       showError("로그인 실패");
-    } else {
+    }else{
       showError("알 수 없는 에러 ${response.statusCode}");
     }
   }
 
-
-  Widget loginView() {
+  Widget loginView(){
     return Center(
       // Center is a layout widget. It takes a single child and positions it
       // in the middle of the parent.
-      child: Column( // column : 세로로 정렬
+      child: Column(   // column : 세로로 정렬
         // Column is also a layout widget. It takes a list of children and
         // arranges them vertically. By default, it sizes itself to fit its
         // children horizontally, and tries to be as tall as its parent.
@@ -143,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
         // horizontal).
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Row( // Row : 가로로 정렬
+          Row(    // Row : 가로로 정렬
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
@@ -195,8 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           SizedBox(height: 20),
           TextButton(
-            style: TextButton.styleFrom(
-                primary: Colors.white, backgroundColor: Colors.grey),
+            style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
             onPressed: () {
               login();
             },
@@ -207,8 +203,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
           SizedBox(height: 5),
           OutlinedButton(
-            style: TextButton.styleFrom(
-                primary: Colors.grey, backgroundColor: Colors.white),
+            style: TextButton.styleFrom( primary: Colors.grey, backgroundColor: Colors.white),
             onPressed: () {
               setState(() {
                 state = 2;
@@ -223,36 +218,77 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
-// 이재영 게시글쓰기 부분
+  // 이재영 게시글쓰기 부분
   Widget writeView() {
     return Center(
-        child: Column(
+        child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
+              SizedBox(
+                height: 200,
+                width: 200,
+                child: Image.asset('assets/music.jpg'),
+              ),
 
+
+              Text(
+                  '♫ 노래 : ',
+                  style: TextStyle(fontSize: 20)
+              ),
+              SizedBox(
+                  width: 200,
+                  height: 40,
+                  child: TextField(
+                    controller: musicController,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      // labelText: 'Password',
+                    ),
+                  )
+              ),
+
+
+              SizedBox(height: 20),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                      '🎙️가수 : ',
+                      style: TextStyle(fontSize: 20)
+                  ),
+
+                  SizedBox(
+                      width: 200,
+                      height: 40,
+                      child: TextField(
+                        controller: singerController,
+                        textAlign: TextAlign.center,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(),
+                          // labelText: 'Password',
+                        ),
+                      )
+                  )
+                ],
+              ),
+
+
+              SizedBox(height: 20),
               Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  children: <Widget>[
                     Text(
-                        '노래 :',
-                        style: TextStyle(fontSize: 20)
-                    ),
-                    Text(
-                        '가수 :',
+                        '',
                         style: TextStyle(fontSize: 20)
                     ),
                     SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Image.asset('assets/music.png'),
-                    ),
-                    SizedBox(
-                        width: 200,
-                        height: 30,
+                        width: 400,
+                        height: 500,
                         child: TextField(
-                          textAlign: TextAlign.center,
+                          textAlign: TextAlign.start,
                           decoration: InputDecoration(
-                            labelText: 'Enter Name',
+                            labelText: '코멘트를 남겨주세요',
                             border: OutlineInputBorder(),
                           ),
                           maxLines: 5, //
@@ -268,28 +304,62 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
 
+  Widget mainView(){
 
-  Widget mainView() {
-    return Center(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
+    const title = '* mainview * ';
+
+    return MaterialApp(
+      title: title,
+      home: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.blue,
+          elevation: 0,
+          title: const Text(title),
+          //leading: IconButton(icon: Icon(Icons.menu), onPressed: null),
+          actions: [
+            IconButton(icon: Icon(Icons.refresh), onPressed: null),
+            IconButton(icon: Icon(Icons.menu), onPressed: null),
+          ],
+        ),
+        body: Container(
+          margin: const EdgeInsets.symmetric(vertical: 20.0),
+          height: 200.0,
+          child: ListView(
+            // This next line does the trick.
+            scrollDirection: Axis.horizontal,
             children: <Widget>[
-              Text(
-                  '전화번호 ',
-                  style: TextStyle(fontSize: 30)
+              Container(
+                width: 160.0,
+                color: Colors.red,
               ),
-            ]
-        ));
+              Container(
+                width: 160.0,
+                color: Colors.blue,
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.green,
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.yellow,
+              ),
+              Container(
+                width: 160.0,
+                color: Colors.orange,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
+  void showError(message){
+    if(ModalRoute.of(context)?.isCurrent != true)   // modalroute 클래스의 한 종류...(?)
+      Navigator.of(context, rootNavigator: true).pop();   //  Navigator.pop()을 사용하면 첫 번째 route로 되돌아갈 수 있음
 
-  void showError(message) {
-    if (ModalRoute
-        .of(context)
-        ?.isCurrent != true) // modalroute 클래스의 한 종류...(?)
-      Navigator.of(context, rootNavigator: true)
-          .pop(); //  Navigator.pop()을 사용하면 첫 번째 route로 되돌아갈 수 있음
-
-    showDialog( // 팝업창을 띄울때 사용
+    showDialog(   // 팝업창을 띄울때 사용
         context: context,
         barrierDismissible: false, // 다이얼로그 밖 영역을 터치했을 때 다이얼로그를 Pop시킬지 선택하는 옵션
         builder: (BuildContext context) {
@@ -304,8 +374,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             //
             content: Column(
-              mainAxisSize: MainAxisSize.min, // 크기만큼만 차지
-              crossAxisAlignment: CrossAxisAlignment.start, // 왼쪽 위 정렬
+              mainAxisSize: MainAxisSize.min,  // 크기만큼만 차지
+              crossAxisAlignment: CrossAxisAlignment.start,  // 왼쪽 위 정렬
               children: <Widget>[
                 Text(
                   message,
