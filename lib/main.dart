@@ -411,6 +411,7 @@ class main_threepart extends StatelessWidget {
           _pageOfTop(), // 상단
           _pageOfMiddle(), // 중단
           _pageOfBottom(), // 하단
+          // build(context), // 마지막단
         ],
       ),
     );
@@ -498,7 +499,7 @@ Widget _pageOfMiddle() {
     //       margin: const EdgeInsets.symmetric(vertical: 20.0),
     //       height: 200.0,
     //       child: ListView(
-    //         // This next line does the trick.
+    //         //   next line does the trick.
     //         scrollDirection: Axis.horizontal,
     //         children: <Widget>[
     //           Container(
@@ -528,15 +529,52 @@ Widget _pageOfMiddle() {
 }
 
 
-Widget _pageOfBottom() {
-  return ListTile(
-    leading: Image.network('https://image.bugsm.co.kr/album/images/1000/40586/4058623.jpg'),
-    title: Text('노래 : 낙하 / 가수 : 악동뮤지션'),
-    subtitle: Text('음악 굿'),
+
+Widget _pageOfBottom(){
+  return Center(
+      child: Column(
+        // padding: const EdgeInsets.all(8),
+        children: <Widget>[
+          Card(child: ListTile(
+              title: Text('♫노래 : 낙하   🎙️가수 : 악동뮤지션'),
+              subtitle: Text('레트로하면서도 세련된 \n음악이야 추천해! 아이유가 참여해서 더 독특하고 풍성하게 들리는 것 같아 \n그나저나 악뮤 컴백은 언제..? '),
+              leading: Image.network('https://image.bugsm.co.kr/album/images/1000/40586/4058623.jpg'),
+              trailing: Icon(Icons.favorite))),
 
 
+          Card(child: ListTile(
+              title: Text('♫노래 : Wannabe   🎙가수 : ITZY'),
+              subtitle: Text('노래도 듣고 뮤직비디오도 꼭 보길 바래! \n다들 이 세상 미모가 아니야!! \n우울할 때마다 맨날 듣는 중이야ㅎㅎㅎ'),
+              leading: Image.network('https://img.hankyung.com/photo/202009/e03249ed43e314ad0736c8e4f14bfa4b.jpg'),
+              trailing: Icon(Icons.favorite))),
 
-  );
-  // return ListView(
-  //    );
+
+          Card(child: ListTile(
+              title: Text('♫노래 : 별의 조각   🎙가수 : 윤하'),
+              subtitle: Text('윤하 노래는 믿고 들어야되는거 다들 알지?ㅎㅎ \n듣다보면 아주 힐링되는 곡인 것 같아 \n나만 듣기 너무 아까운 곡이랄까..? 궁금하지?? 꼭 들어봥'),
+              leading: Image.network('https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/tv/2021/11/17/1637116189_1612956.jpg'),
+              trailing: Icon(Icons.favorite))),
+
+
+          Card(child: ListTile(
+              title: Text('♫노래 : 되돌리다   🎙가수 : 이승기'),
+              subtitle: Text("그때 그 시절 감성 가득가득이야.. 이노래 아는 사람 손...? \n이 노래 모르면 간첩이지~!!"),
+              leading: Image.network('http://gaonchart.co.kr/upload_images/board/201411/176AF6BE116B4600B18020BD090D23F1.jpg'),
+              trailing: Icon(Icons.favorite))),
+
+          Card(child: ListTile(
+              title: Text('♫노래 : INVU   🎙가수 : 태연'),
+              subtitle: Text('이번에 나온 태연 신곡인데 들으면 들을수록 중독성있어!! \n음악방송에서 태연이 하는 안무가 너무 멋있더라ㅜㅠ '),
+              leading: Image.network('https://t2.genius.com/unsafe/409x409/https%3A%2F%2Fimages.genius.com%2F19ed6351954c2b686b79302ae0c1e55c.1000x1000x1.png'),
+              trailing: Icon(Icons.favorite))),
+
+          Card(child: ListTile(
+              title: Text('♫노래 : 8282   🎙가수 : 다비치'),
+              subtitle: Text('이 노래 다들 노래방 18번곡 아닌가~? \n노래방 갈 때마다 빠지지 않고 부르는 노래지 암암 give me a call~ babe babe~'),
+              leading: Image.network('https://image.aladin.co.kr/product/339/50/cover500/923138502x_2.jpg'),
+              trailing: Icon(Icons.favorite))),
+        ],
+      ));
 }
+
+
