@@ -58,6 +58,10 @@ class _MyHomePageState extends State<MyHomePage> {
       case 5:
         view = emogiView();
         break;
+      case 6:
+        view = emogiView1();
+        break;
+
       case 7:
         view = plusListView();
         break;
@@ -531,7 +535,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(fontSize: 15)
                     ),
                     SizedBox(
-                        width: 250,
+                        width: 180,
                         height: 200,
                         child: TextField(
                           textAlign: TextAlign.center,
@@ -569,26 +573,26 @@ class _MyHomePageState extends State<MyHomePage> {
 
             Column(
               children: <Widget>[
-                Image.asset('assets/1.png'),
+                Image.asset('assets/1.jpg'),
                 Text('재영'),
 
           ],
             ),
             Column(
               children: <Widget>[
-                Image.asset('assets/2.png'),
-                Text('대영  재영'),
+                Image.asset('assets/2.jpg'),
+                Text('대영'),
               ],
             ),
             Column(
               children: <Widget>[
-                Image.asset('assets/3.png'),
+                Image.asset('assets/3.jpg'),
                 Text(''),
               ],
             ),
             Column(
               children: <Widget>[
-                Image.asset('assets/4.png'),
+                Image.asset('assets/4.jpg'),
                 Text('정현 진석'),
           ],
         ),
@@ -604,37 +608,133 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Column(
               children: <Widget>[
-                 Image.asset('assets/5.png'),
+                 Image.asset('assets/5.jpg'),
                  Text(''),
                  ],
                ),
 
             Column(
             children: <Widget>[
-                  Image.asset('assets/6.png'),
+                  Image.asset('assets/6.jpg'),
                   Text(''),
                   ],
                 ),
 
             Column(
             children: <Widget>[
-                  Image.asset('assets/7.png'),
+                  Image.asset('assets/7.jpg'),
                   Text('민기'),
                   ],
                   ),
 
             Column(
             children: <Widget>[
-                  Image.asset('assets/8.png'),
+                  Image.asset('assets/8.jpg'),
                   Text('수빈'),
                   ],
+
                   ),
+            SizedBox(height: 20),
+            TextButton(
+              style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
+              onPressed: () {
+                emogicheck();
+              },
+              child:
+              Text("돌아가기", style: TextStyle(fontSize: 15)),   // 이거 때문에 이모지들 위치가 마음대로 바뀜... 이거 수정필요
+            ),
+
         ],
         ),
     ]
         );
       }
 
+  Widget emogiView1() {
+    return Column(
+        children: <Widget>[
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/1.jpg'),
+                  Text(''),
+
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/2.jpg'),
+                  Text('민지  희경'),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/3.jpg'),
+                  Text(''),
+                ],
+              ),
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/4.jpg'),
+                  Text(''),
+                ],
+              ),
+            ],
+          ),
+
+          SizedBox(
+            height: 30,
+          ),
+
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: <Widget>[
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/5.jpg'),
+                  Text('세연'),
+                ],
+              ),
+
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/6.jpg'),
+                  Text('현도 주석'),
+                ],
+              ),
+
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/7.jpg'),
+                  Text('민기 수빈'),
+                ],
+              ),
+
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/8.jpg'),
+                  Text(''),
+                ],
+
+              ),
+              SizedBox(height: 20),
+              TextButton(
+                style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
+                onPressed: () {
+                  emogicheck();
+                },
+                child:
+                Text("돌아가기", style: TextStyle(fontSize: 15)),   // 이거 때문에 이모지들 위치가 마음대로 바뀜... 이거 수정필요
+              ),
+
+            ],
+          ),
+        ]
+    );
+  }
 
 
   void postsubmit() async{
@@ -644,6 +744,12 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  void emogicheck() async{
+    Text("이모지 test", style: TextStyle(fontSize: 15));
+    setState(() {
+      state = 1;
+    });
+  }
 
   Widget main_threepart(){
     return Padding(
@@ -679,218 +785,197 @@ Widget _pageOfTop() {
 }
 
   Widget _pageOfMiddle() {
-    return Center(
-      child: Row(
-        //scrollDirection: Axis.horizontal,
-        children: <Widget>[
-          TextButton(
-            onPressed: () {},
-            child: Text("공부"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed 가 null 일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
+    return Stack(
+        children:<Widget>[
+          Image.asset('assets/fiveline.jpg',width:1200),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              //Image.asset('assets/fiveline.jpg'),
+              //scrollDirection: Axis.horizontal,Image.asset('assets/akmu.jpg')
+              //mainAxisAlignment: mainAxisAlignment.spaceEvenly,
+              children: [
+                TextButton(
+                  onPressed: () {},
+                  child: Text("공부"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed 가 null 일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("잠"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed가 null일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("휴식"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed가 null일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("운전"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed가 null일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("카페"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed가 null일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {
+                    // setState(() {
+                    //   state = 7;
+                    //});
+                    showDialog(
+                        context: context,
+                        barrierDismissible: false,
+                        builder:(BuildContext context){
+                          return AlertDialog(
+                            title: Text('팝업 메시지'),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: <Widget>[
+                                  Text('새로운 리스트 목록을'),
+                                  Text('추가하시겠습니까?'), ], ), ),
+                            actions: <Widget>[
+                              TextButton( child: Text('ok'),
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                  setState(() {
+                                    state = 7;
+                                  });
+                                }, ),
+                              TextButton(
+                                child: Text('cancel'), onPressed: () {
+                                Navigator.of(context).pop();
+                              }, ),
+                            ], ); } ); },
+                  child: Text("+"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed가 null일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("테스트2"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed가 null일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                TextButton(
+                  onPressed: () {},
+                  child: Text("테스트3"),
+                  style: TextButton.styleFrom(
+                    primary: Colors.black, //글자색
+                    onSurface: Colors.blue, //onpressed 가 null 일때 색상
+                    backgroundColor: Colors.white,
+                    shadowColor: Colors.orange, //그림자 색상
+                    elevation: 1, // 버튼 입체감
+                    textStyle: TextStyle(fontWeight: FontWeight.bold),
+                    padding: EdgeInsets.all(16.0),
+                    minimumSize: Size(200, 75), //최소 사이즈
+                    side: BorderSide(color: Colors.black, width: 2.0), //선
+                    shape:
+                    CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
+                    alignment: Alignment.center, //글자위치 변경
+                  ),
+                ),
+                SizedBox(
+                  width: 200,
+                  height: 100,
+                ),],
             ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text("잠"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed가 null일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text("휴식"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed가 null일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text("운전"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed가 null일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text("카페"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed가 null일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              // setState(() {
-              //   state = 7;
-              //});
-              showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder:(BuildContext context){
-                    return AlertDialog(
-                      title: Text('팝업 메시지'),
-                      content: SingleChildScrollView(
-                        child: ListBody(
-                          children: <Widget>[
-                            Text('새로운 리스트 목록을'),
-                            Text('추가하시겠습니까?'), ], ), ),
-                      actions: <Widget>[
-                        TextButton( child: Text('ok'),
-                          onPressed: () {
-                            Navigator.of(context).pop();
-                            setState(() {
-                              state = 7;
-                            });
-                          }, ),
-                        TextButton(
-                          child: Text('cancel'), onPressed: () {
-                          Navigator.of(context).pop();
-                        }, ),
-                      ], ); } ); },
-            child: Text("+"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed가 null일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text("테스트2"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed가 null일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: Text("테스트3"),
-            style: TextButton.styleFrom(
-              primary: Colors.black, //글자색
-              onSurface: Colors.blue, //onpressed 가 null 일때 색상
-              backgroundColor: Colors.white,
-              shadowColor: Colors.orange, //그림자 색상
-              elevation: 1, // 버튼 입체감
-              textStyle: TextStyle(fontWeight: FontWeight.bold),
-              padding: EdgeInsets.all(16.0),
-              minimumSize: Size(200, 75), //최소 사이즈
-              side: BorderSide(color: Colors.black, width: 2.0), //선
-              shape:
-              CircleBorder(), // BeveledRectangleBorder(): 각진버튼, CircleBorder : 동그라미버튼, StadiumBorder : 모서리가 둥근버튼,
-              alignment: Alignment.center, //글자위치 변경
-            ),
-          ),
-          SizedBox(
-            width: 200,
-            height: 200,
-          ),],
-      ),
+          )
+        ]
     );
+
   }
-
-
-
-
-// child: ListView(
-//       // This next line does the trick.
-//       scrollDirection: Axis.horizontal,
-//       children: <Widget>[
-//         Container(
-//           width: 16.0,
-//           color: Colors.red,
-//         ),
-//         Container(
-//           width: 16.0,
-//           color: Colors.blue,
-//         ),
-//         Container(
-//           width: 16.0,
-//           color: Colors.green,
-//         ),
-//         Container(
-//           width: 16.0,
-//           color: Colors.yellow,
-//         ),
-//         Container(
-//           width: 16.0,
-//           color: Colors.orange,
-//         ),
-//       ],
-//     ),
 
 
 Widget _pageOfBottom(){
@@ -917,7 +1002,7 @@ Widget _pageOfBottom(){
             leading: Image.network('https://img.hankyung.com/photo/202009/e03249ed43e314ad0736c8e4f14bfa4b.jpg'),
             trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
               setState(() {
-                state = 5;
+                state = 6;
               });
             },),//Icon(Icons.favorite)
           )),
