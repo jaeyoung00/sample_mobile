@@ -206,7 +206,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextButton.styleFrom( primary: Colors.grey, backgroundColor: Colors.white),
             onPressed: () {
               setState(() {
-                state = 2;
+                state = 1;
               });
             },
             child:
@@ -416,6 +416,7 @@ class main_threepart extends StatelessWidget {
     );
   }
 }
+
 Widget _pageOfTop() {
   return Column(
     children: <Widget>[
@@ -526,17 +527,16 @@ Widget _pageOfMiddle() {
   );
 }
 
+
 Widget _pageOfBottom() {
-  final items = List.generate(15, (i) {
-    var num = i + 1;
-    return ListTile(
-      leading: Icon(Icons.notifications),
-      title: Text('$num번째 ListTile'),
-    );
-  });
-  return ListView(
-    physics: NeverScrollableScrollPhysics(), // 해당 리스트의 스크롤 금지
-    shrinkWrap: true, // 상위 리스트 위젯이 별도로 있다면 true 로 설정해야 스크롤이 가능
-    children: items,
+  return ListTile(
+    leading: Image.network('https://image.bugsm.co.kr/album/images/1000/40586/4058623.jpg'),
+    title: Text('노래 : 낙하 / 가수 : 악동뮤지션'),
+    subtitle: Text('음악 굿'),
+
+
+
   );
+  // return ListView(
+  //    );
 }
