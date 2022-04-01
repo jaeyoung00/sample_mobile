@@ -379,9 +379,9 @@ class _MyHomePageState extends State<MyHomePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               SizedBox(
-                height: 200,
-                width: 200,
-                child: Image.asset('assets/akmu.jpg'), //여기서 뮤직은 사진 저장명 정원:akmu 재영: music
+                height: 100,
+                width: 100,
+                child: Image.asset('assets/music.jpg'), //여기서 뮤직은 사진 저장명 정원:akmu 재영: music
               ),
 
 
@@ -392,12 +392,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Text(
                       '♫ 노래 : ',
-                      style: TextStyle(fontSize: 20)
+                      style: TextStyle(fontSize: 15)
                   ),
 
                   SizedBox(
                       width: 200,
-                      height: 40,
+                      height: 30,
                       child: TextField(
                         controller: singerController,
                         textAlign: TextAlign.center,
@@ -417,12 +417,12 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   Text(
                       '🎙️가수 : ',
-                      style: TextStyle(fontSize: 20)
+                      style: TextStyle(fontSize: 15)
                   ),
 
                   SizedBox(
                       width: 200,
-                      height: 40,
+                      height: 30,
                       child: TextField(
                         controller: singerController,
                         textAlign: TextAlign.center,
@@ -442,13 +442,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   children: <Widget>[
                     Text(
                         '',
-                        style: TextStyle(fontSize: 20)
+                        style: TextStyle(fontSize: 15)
                     ),
                     SizedBox(
-                        width: 400,
-                        height: 500,
+                        width: 250,
+                        height: 200,
                         child: TextField(
-                          textAlign: TextAlign.start,
+                          textAlign: TextAlign.center,
                           decoration: InputDecoration(
                             labelText: '코멘트를 남겨주세요',
                             border: OutlineInputBorder(),
