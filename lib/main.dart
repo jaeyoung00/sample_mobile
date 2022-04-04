@@ -36,6 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final singerController = TextEditingController();
   final musicController = TextEditingController();
 
+
   @override
   Widget build(BuildContext context) {
     var view = loginView();
@@ -57,11 +58,7 @@ class _MyHomePageState extends State<MyHomePage> {
         break;
       case 5:
         view = emogiView();
-        break;
-      case 6:
-        view = emogiView1();
-        break;
-
+        break;   //6번 뷰 남았음
       case 7:
         view = plusListView();
         break;
@@ -77,8 +74,6 @@ class _MyHomePageState extends State<MyHomePage> {
     // showError("test");
     var phone = phoneController.text;
     var password = passwordController.text;
-    var singer = singerController.text;  //재영 write 뷰
-    var music = musicController.text; //재영 write 뷰
     if(phone.length == 0){
       showError("전화번호를 입력해주세요.");
       return;
@@ -90,7 +85,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
     var postUrl = "http://192.168.213.69/login";
     var u = Uri.parse(postUrl);
-    var body = convert.jsonEncode({'phone': phone, 'password': password, 'singer' : singer, 'music' : music});
+    var body = convert.jsonEncode({'phone': phone, 'password': password});
     print(phone);
 
     var response = await http.post(u, headers: {"Content-Type": "application/json"},
@@ -459,11 +454,14 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+void write() async{
+    var singer = singerController.text;
+    var music = musicController.text;
+    var body = convert.jsonEncode({'singer' : singer , 'music' : music});
+}
 
   //재영 글쓰기 뷰
   Widget writeView() {
-    var singerController;
-    var musicController;
     return Center(
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -471,7 +469,7 @@ class _MyHomePageState extends State<MyHomePage> {
               SizedBox(
                 height: 100,
                 width: 100,
-                child: Image.asset('assets/music.jpg'), //여기서 뮤직은 사진 저장명 정원:akmu 재영: music
+                child: Image.asset('assets/akmu.jpg'), //여기서 뮤직은 사진 저장명 정원:akmu 재영: music
               ),
 
 
@@ -490,7 +488,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 30,
                       child: TextField(
                         controller: singerController,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.start,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           // labelText: 'Password',
@@ -515,7 +513,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 30,
                       child: TextField(
                         controller: singerController,
-                        textAlign: TextAlign.center,
+                        textAlign: TextAlign.start,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           // labelText: 'Password',
@@ -525,39 +523,39 @@ class _MyHomePageState extends State<MyHomePage> {
                 ],
               ),
 
-
               SizedBox(height: 20),
               Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                        '',
-                        style: TextStyle(fontSize: 15)
-                    ),
-                    SizedBox(
-                        width: 180,
-                        height: 200,
-                        child: TextField(
-                          textAlign: TextAlign.center,
-                          decoration: InputDecoration(
-                            labelText: '코멘트를 남겨주세요',
-                            border: OutlineInputBorder(),
-                          ),
-                          maxLines: 5, //
-                          minLines: 1, //
-                        )
-                    ),
-                    SizedBox(height: 20),
-                    TextButton(
-                      style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
-                      onPressed: () {
-                        postsubmit();
-                      },
-                      child:
-                      Text("작성 완료", style: TextStyle(fontSize: 15)),
-                    ),
-                  ]
-              )
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Text(
+                      '',
+                      style: TextStyle(fontSize: 15)
+                  ),
+                  SizedBox(
+                      width: 300,
+                      height: 100,
+                      child: TextField(
+                        textAlign: TextAlign.start,
+                        decoration: InputDecoration(
+                          labelText: '코멘트를 남겨주세요',
+                          border: OutlineInputBorder(),
+                        ),
+                        maxLines: 5, //
+                        minLines: 1, //
+                      )
+                  ),
+
+                ],
+              ),
+              SizedBox(height: 20),
+              TextButton(
+                style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
+                onPressed: () {
+                  postsubmit();
+                },
+                child:
+                Text("작성 완료", style: TextStyle(fontSize: 15)),
+              ),
             ]
         )
     );
@@ -565,92 +563,6 @@ class _MyHomePageState extends State<MyHomePage> {
 
   // 재영 공감버튼 부분
   Widget emogiView() {
-    return Column(
-      children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-
-            Column(
-              children: <Widget>[
-                Image.asset('assets/1.jpg'),
-                Text('재영'),
-
-          ],
-            ),
-            Column(
-              children: <Widget>[
-                Image.asset('assets/2.jpg'),
-                Text('대영'),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Image.asset('assets/3.jpg'),
-                Text(''),
-              ],
-            ),
-            Column(
-              children: <Widget>[
-                Image.asset('assets/4.jpg'),
-                Text('정현 진석'),
-          ],
-        ),
-        ],
-    ),
-
-          SizedBox(
-            height: 30,
-            ),
-
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Column(
-              children: <Widget>[
-                 Image.asset('assets/5.jpg'),
-                 Text(''),
-                 ],
-               ),
-
-            Column(
-            children: <Widget>[
-                  Image.asset('assets/6.jpg'),
-                  Text(''),
-                  ],
-                ),
-
-            Column(
-            children: <Widget>[
-                  Image.asset('assets/7.jpg'),
-                  Text('민기'),
-                  ],
-                  ),
-
-            Column(
-            children: <Widget>[
-                  Image.asset('assets/8.jpg'),
-                  Text('수빈'),
-                  ],
-
-                  ),
-            SizedBox(height: 20),
-            TextButton(
-              style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
-              onPressed: () {
-                emogicheck();
-              },
-              child:
-              Text("돌아가기", style: TextStyle(fontSize: 15)),   // 이거 때문에 이모지들 위치가 마음대로 바뀜... 이거 수정필요
-            ),
-
-        ],
-        ),
-    ]
-        );
-      }
-
-  Widget emogiView1() {
     return Column(
         children: <Widget>[
           Row(
@@ -660,14 +572,14 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: <Widget>[
                   Image.asset('assets/1.jpg'),
-                  Text(''),
+                  Text('재영'),
 
                 ],
               ),
               Column(
                 children: <Widget>[
                   Image.asset('assets/2.jpg'),
-                  Text('민지  희경'),
+                  Text('대영'),
                 ],
               ),
               Column(
@@ -679,7 +591,7 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: <Widget>[
                   Image.asset('assets/4.jpg'),
-                  Text(''),
+                  Text('정현 진석'),
                 ],
               ),
             ],
@@ -695,28 +607,28 @@ class _MyHomePageState extends State<MyHomePage> {
               Column(
                 children: <Widget>[
                   Image.asset('assets/5.jpg'),
-                  Text('세연'),
+                  Text(''),
                 ],
               ),
 
               Column(
                 children: <Widget>[
                   Image.asset('assets/6.jpg'),
-                  Text('현도 주석'),
+                  Text(''),
                 ],
               ),
 
               Column(
                 children: <Widget>[
                   Image.asset('assets/7.jpg'),
-                  Text('민기 수빈'),
+                  Text('민기'),
                 ],
               ),
 
               Column(
                 children: <Widget>[
                   Image.asset('assets/8.jpg'),
-                  Text(''),
+                  Text('수빈'),
                 ],
 
               ),
@@ -735,7 +647,6 @@ class _MyHomePageState extends State<MyHomePage> {
         ]
     );
   }
-
 
   void postsubmit() async{
     Text("회원가입 test", style: TextStyle(fontSize: 15));
@@ -764,25 +675,25 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 
-Widget _pageOfTop() {
-  return Center(
-    child: Column(
-      children: <Widget>[
-        TextField(
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: '여기 입력',
-          ),
+  Widget _pageOfTop() {
+    return Center(
+      child: Column(
+        children: <Widget>[
+          TextField(
+            decoration: InputDecoration(
+              border: OutlineInputBorder(),
+              labelText: '여기 입력',
+            ),
 
-        ),
-        SizedBox(
-          width: 200,
-          height: 50,
-        ),
-      ],
-    ),
-  );
-}
+          ),
+          SizedBox(
+            width: 200,
+            height: 50,
+          ),
+        ],
+      ),
+    );
+  }
 
   Widget _pageOfMiddle() {
     return Stack(
@@ -978,85 +889,85 @@ Widget _pageOfTop() {
   }
 
 
-Widget _pageOfBottom(){
-  return Center(
-      child: Column(
-        // padding: const EdgeInsets.all(8),
-        children: <Widget>[
-          Card(child: ListTile(
-            title: Text('♫노래 : 낙하   🎙️가수 : 악동뮤지션'),
-            subtitle: Text('레트로하면서도 세련된 \n음악이야 추천해! 아이유가 참여해서 더 독특하고 풍성하게 들리는 것 같아 \n그나저나 악뮤 컴백은 언제..? '),
-            leading: Image.network('https://image.bugsm.co.kr/album/images/1000/40586/4058623.jpg'),
-            trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
-              setState(() {
-                state = 5;
-              });
-            },),//Icon(Icons.favorite)
-          )
-          ),
+  Widget _pageOfBottom(){
+    return Center(
+        child: Column(
+          // padding: const EdgeInsets.all(8),
+          children: <Widget>[
+            Card(child: ListTile(
+              title: Text('♫노래 : 낙하   🎙️가수 : 악동뮤지션'),
+              subtitle: Text('레트로하면서도 세련된 \n음악이야 추천해! 아이유가 참여해서 더 독특하고 풍성하게 들리는 것 같아 \n그나저나 악뮤 컴백은 언제..? '),
+              leading: Image.network('https://image.bugsm.co.kr/album/images/1000/40586/4058623.jpg'),
+              trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
+                setState(() {
+                  state = 5;
+                });
+              },),//Icon(Icons.favorite)
+            )
+            ),
 
 
-          Card(child: ListTile(
-            title: Text('♫노래 : Wannabe   🎙가수 : ITZY'),
-            subtitle: Text('노래도 듣고 뮤직비디오도 꼭 보길 바래! \n다들 이 세상 미모가 아니야!! \n우울할 때마다 맨날 듣는 중이야ㅎㅎㅎ'),
-            leading: Image.network('https://img.hankyung.com/photo/202009/e03249ed43e314ad0736c8e4f14bfa4b.jpg'),
-            trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
-              setState(() {
-                state = 6;
-              });
-            },),//Icon(Icons.favorite)
-          )),
+            Card(child: ListTile(
+              title: Text('♫노래 : Wannabe   🎙가수 : ITZY'),
+              subtitle: Text('노래도 듣고 뮤직비디오도 꼭 보길 바래! \n다들 이 세상 미모가 아니야!! \n우울할 때마다 맨날 듣는 중이야ㅎㅎㅎ'),
+              leading: Image.network('https://img.hankyung.com/photo/202009/e03249ed43e314ad0736c8e4f14bfa4b.jpg'),
+              trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
+                setState(() {
+                  state = 6;
+                });
+              },),//Icon(Icons.favorite)
+            )),
 
 
-          Card(child: ListTile(
-            title: Text('♫노래 : 별의 조각   🎙가수 : 윤하'),
-            subtitle: Text('윤하 노래는 믿고 들어야되는거 다들 알지?ㅎㅎ \n듣다보면 아주 힐링되는 곡인 것 같아 \n나만 듣기 너무 아까운 곡이랄까..? 궁금하지?? 꼭 들어봥'),
-            leading: Image.network('https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/tv/2021/11/17/1637116189_1612956.jpg'),
-            trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
-              setState(() {
-                state = 5;
-              });
-            },),//Icon(Icons.favorite)
-          )),
+            Card(child: ListTile(
+              title: Text('♫노래 : 별의 조각   🎙가수 : 윤하'),
+              subtitle: Text('윤하 노래는 믿고 들어야되는거 다들 알지?ㅎㅎ \n듣다보면 아주 힐링되는 곡인 것 같아 \n나만 듣기 너무 아까운 곡이랄까..? 궁금하지?? 꼭 들어봥'),
+              leading: Image.network('https://thumbnews.nateimg.co.kr/view610///news.nateimg.co.kr/orgImg/tv/2021/11/17/1637116189_1612956.jpg'),
+              trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
+                setState(() {
+                  state = 5;
+                });
+              },),//Icon(Icons.favorite)
+            )),
 
 
-          Card(child: ListTile(
-            title: Text('♫노래 : 되돌리다   🎙가수 : 이승기'),
-            subtitle: Text("그때 그 시절 감성 가득가득이야.. 이노래 아는 사람 손...? \n이 노래 모르면 간첩이지~!!"),
-            leading: Image.network('http://gaonchart.co.kr/upload_images/board/201411/176AF6BE116B4600B18020BD090D23F1.jpg'),
-            trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
-              setState(() {
-                state = 5;
-              });
-            },),//Icon(Icons.favorite)
-          )),
+            Card(child: ListTile(
+              title: Text('♫노래 : 되돌리다   🎙가수 : 이승기'),
+              subtitle: Text("그때 그 시절 감성 가득가득이야.. 이노래 아는 사람 손...? \n이 노래 모르면 간첩이지~!!"),
+              leading: Image.network('http://gaonchart.co.kr/upload_images/board/201411/176AF6BE116B4600B18020BD090D23F1.jpg'),
+              trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
+                setState(() {
+                  state = 5;
+                });
+              },),//Icon(Icons.favorite)
+            )),
 
-          Card(child: ListTile(
-            title: Text('♫노래 : INVU   🎙가수 : 태연'),
-            subtitle: Text('이번에 나온 태연 신곡인데 들으면 들을수록 중독성있어!! \n음악방송에서 태연이 하는 안무가 너무 멋있더라ㅜㅠ '),
-            leading: Image.network('https://t2.genius.com/unsafe/409x409/https%3A%2F%2Fimages.genius.com%2F19ed6351954c2b686b79302ae0c1e55c.1000x1000x1.png'),
-            trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
-              setState(() {
-                state = 5;
-              });
-            },),//Icon(Icons.favorite)
-          )),
+            Card(child: ListTile(
+              title: Text('♫노래 : INVU   🎙가수 : 태연'),
+              subtitle: Text('이번에 나온 태연 신곡인데 들으면 들을수록 중독성있어!! \n음악방송에서 태연이 하는 안무가 너무 멋있더라ㅜㅠ '),
+              leading: Image.network('https://t2.genius.com/unsafe/409x409/https%3A%2F%2Fimages.genius.com%2F19ed6351954c2b686b79302ae0c1e55c.1000x1000x1.png'),
+              trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
+                setState(() {
+                  state = 5;
+                });
+              },),//Icon(Icons.favorite)
+            )),
 
-          Card(child: ListTile(
-            title: Text('♫노래 : 8282   🎙가수 : 다비치'),
-            subtitle: Text('이 노래 다들 노래방 18번곡 아닌가~? \n노래방 갈 때마다 빠지지 않고 부르는 노래지 암암 give me a call~ babe babe~'),
-            leading: Image.network('https://image.aladin.co.kr/product/339/50/cover500/923138502x_2.jpg'),
-            trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
-              setState(() {
-                state = 5;
-              });
-            },
-            ),//Icon(Icons.favorite)
-          )
-          ),
-        ],
-      ));
-}
+            Card(child: ListTile(
+              title: Text('♫노래 : 8282   🎙가수 : 다비치'),
+              subtitle: Text('이 노래 다들 노래방 18번곡 아닌가~? \n노래방 갈 때마다 빠지지 않고 부르는 노래지 암암 give me a call~ babe babe~'),
+              leading: Image.network('https://image.aladin.co.kr/product/339/50/cover500/923138502x_2.jpg'),
+              trailing: IconButton(icon: Icon(Icons.favorite, color: Colors.pink.shade200), onPressed: () {
+                setState(() {
+                  state = 5;
+                });
+              },
+              ),//Icon(Icons.favorite)
+            )
+            ),
+          ],
+        ));
+  }
 
 
   void showError(message){
