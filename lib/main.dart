@@ -162,7 +162,7 @@ class _MyHomePageState extends State<MyHomePage> {
             style: TextButton.styleFrom( primary: Colors.white, backgroundColor: Colors.grey),
             onPressed: () {
               setState(() {
-                state=1;
+                state=1;       //   원래 코드는 login(); 인데 구현이 안되서 setstate로 변경했습니다..!!
               });
             },
             child:
